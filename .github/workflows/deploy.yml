@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - master
+env:
+  NAME: 'My action'
 jobs:
   generate-a-secret-output:
     strategy:
@@ -22,6 +24,8 @@ jobs:
           echo "The secet number is ${{ steps.sets-a-secret.outputs.secret-number }}"
   lint:
     runs-on: ubuntu-latest
+    env:
+      NAME: 'My Action 2'
     steps:
       - name: Get code
         uses: actions/checkout@v3
