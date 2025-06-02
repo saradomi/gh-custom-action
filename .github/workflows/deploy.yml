@@ -11,7 +11,7 @@ jobs:
   generate-a-secret-output:
     strategy:
       matrix:
-        version: [10, 12, 14]
+        version: [10 ]
         os: [ubuntu-22.04]
     runs-on: ${{matrix.os}}
     steps:
@@ -24,6 +24,8 @@ jobs:
       - name: Use that secret output
         run: |
           echo "The secet number is ${{ steps.sets-a-secret.outputs.secret-number }}"
+          echo "${{ github.event_name }}"
+          echo "${{ toJson(github.event) }}"
   lint:
     runs-on: ubuntu-latest
     env:
