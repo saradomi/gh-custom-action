@@ -12,7 +12,7 @@ jobs:
         run: |
           the_secret=$((RANDOM))
           echo "::add-mask::$the-secret"
-          echo "secret-number=$thesecret" >> "$GITHUB_OUPUT"
+          echo "secret-number=$the_secret" >> "$GITHUB_OUPUT"
       - name: Use that secret output
         run: |
           echo "The secet number is ${{ steps.sets-a-secret.outputs.secret-number }}"
