@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - master
+    tags:
+      - '**'
   schedule:
   - cron: '0 21 * * *'
 env:
@@ -14,6 +16,7 @@ jobs:
         version: [10 ]
         os: [ubuntu-22.04]
     runs-on: ${{matrix.os}}
+    timeout-minutes: 5
     steps:
       - id: sets-a-secret
         name: Generate, mask and output a secret
@@ -23,7 +26,7 @@ jobs:
           echo "secret-number=$the_secret" >> "$GITHUB_OUTPUT"
       - name: Use that secret output
         run: |
-          echo "The secet number is ${{ steps.sets-a-secret.outputs.secret-number }}"
+          echo "The secret number is ${{ steps.sets-a-secret.outputs.secret-number }}"
           echo "${{ github.event_name }}"
           echo "${{ toJson(github.event) }}"
   lint:
