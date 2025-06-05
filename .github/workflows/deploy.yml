@@ -72,7 +72,7 @@ jobs:
     with:
       test-job: "${{ needs.test.outputs.tests-passed }}"
   deploy:
-    needs: build
+    needs: call-build
     runs-on: ubuntu-latest
     steps:
       - name: Get code
