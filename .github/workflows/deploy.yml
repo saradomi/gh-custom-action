@@ -47,6 +47,8 @@ jobs:
         run: npm run lint
   test:
     runs-on: ubuntu-latest
+    ouputs:
+      tests-passed: ${{ steps.run-tests.outcome == 'success' }}
     steps:
       - name: Get code
         uses: actions/checkout@v3
@@ -64,24 +66,11 @@ jobs:
         with:
           name: test-report
           path: test.json
-  build:
+  call-build:
     needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get code
-        uses: actions/checkout@v3
-      - name: Load and cache dependencies
-        uses: ./.github/actions/cached-deps
-      - name: Build website
-        run: |
-          echo "::group::Building"
-          npm run build
-          echo "::endgroup::
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: dist-files
-          path: dist
+    uses: ./.github/workflows/build.yml
+    with:
+      test-job: "${{ needs.test.outputs.tests-passed }}"
   deploy:
     needs: build
     runs-on: ubuntu-latest
