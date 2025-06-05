@@ -5,7 +5,7 @@ on:
       test-job:
         description: 'Testing sucsess'
         required: true
-        default: 'false'
+        type: string
 jobs:
   build:
     if: ${{ inputs.test-job == 'true' }}
