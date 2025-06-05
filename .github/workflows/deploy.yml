@@ -47,7 +47,7 @@ jobs:
         run: npm run lint
   test:
     runs-on: ubuntu-latest
-    ouputs:
+    outputs:
       tests-passed: ${{ steps.run-tests.outcome == 'success' }}
     steps:
       - name: Get code
