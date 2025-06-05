@@ -54,7 +54,10 @@ jobs:
         uses: ./.github/actions/cached-deps
       - name: Test code
         id: run-tests
-        run: npm run test
+        run: |
+          echo "::group::Running Tests"
+          npm run test
+          echo "::endgroup::"
       - name: Upload test report
         if: failure() && steps.run-tests.outcome == 'failure'
         uses: actions/upload-artifact@v4
@@ -70,7 +73,10 @@ jobs:
       - name: Load and cache dependencies
         uses: ./.github/actions/cached-deps
       - name: Build website
-        run: npm run build
+        run: |
+          echo "::group::Building"
+          npm run build
+          echo "::endgroup::
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
