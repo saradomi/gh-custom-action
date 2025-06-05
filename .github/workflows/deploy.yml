@@ -48,7 +48,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     outputs:
-      tests-passed: ${{ steps.run-tests.outcome == 'success' }}
+      tests-passed: ${{ steps.set-output.outputs.tests-passed }}
     steps:
       - name: Get code
         uses: actions/checkout@v3
@@ -66,11 +66,14 @@ jobs:
         with:
           name: test-report
           path: test.json
+      - name: Set test result output
+        id: set-output
+        run: echo "tests-passed=${{ steps.run-tests.outcome == 'success' }}" >> $GITHUB_OUTPUT
   call-build:
     needs: test
     uses: ./.github/workflows/build.yml
     with:
-      test-job: "${{ needs.test.outputs.tests-passed }}"
+      test-job: ${{ needs.test.outputs.tests-passed }}
   deploy:
     needs: call-build
     runs-on: ubuntu-latest
