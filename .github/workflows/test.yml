@@ -1,12 +1,13 @@
 name: Test workflow
-on: workflow_dispatch
+on:
+  workflow_dispatch:
 jobs:
   set_and_use_env_vars:
     runs-on: ubuntu-latest
     steps:
-      -name: Set environment variable
-      run: echo "MY_ENV_VAR=myValue" >> $GITHUB_ENV
-      -name: Use environment variable
-      run: echo "The value of my env varaible is $MY_ENV_VAR"
-      -name: Add job summary
-      run: echo "### Job Summary :rocket:" >> $GITHUB_STEP_SUMMARY
+      - name: Set environment variable
+        run: echo "MY_ENV_VAR=myValue" >> $GITHUB_ENV
+      - name: Use environment variable
+        run: echo "The value of my env varaible is $MY_ENV_VAR"
+      - name: Add job summary
+        run: echo "### Job Summary :rocket:" >> $GITHUB_STEP_SUMMARY
