@@ -1,5 +1,6 @@
 name: Reusable build workflow
 on:
+  workflow_dispatch:
   workflow_call:
     inputs:
       test-job:
