@@ -39,16 +39,12 @@ jobs:
         run: echo "The value of my env varaible is $MY_ENV_VAR"
       - name: Add job summary
         run: echo "### Job Summary :rocket:" >> $GITHUB_STEP_SUMMARY
-  pr-comment:
+  log-info:
     runs-on: ubuntu-latest
     steps:
-      - name: comment on new pr
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: 'Thanks for contribution!'
-            })
+      - run: |
+          echo "String: ${{ inputs.string }}"
+          echo "Number: ${{ inputs.number }}"
+          echo "Boolean: ${{ inputs.boolean }}"
+          echo "Option: ${{ inputs.option }}"
+          echo "Env: ${{ inputs.environment }}"
