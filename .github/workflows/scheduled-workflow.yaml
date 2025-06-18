@@ -1,0 +1,9 @@
+name: Scheduled Workflow
+on:
+  workflow_dispatch:
+run-name: "Created by ${{ github.actor }}"
+jobs:
+  run-check:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Amazing"
