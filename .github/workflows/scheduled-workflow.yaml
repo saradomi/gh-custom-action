@@ -1,6 +1,7 @@
 name: Scheduled Workflow
 on:
   workflow_dispatch:
+  issues:
 run-name: "Created by ${{ github.actor }}"
 jobs:
   run-check:
