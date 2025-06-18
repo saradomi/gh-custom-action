@@ -1,7 +1,8 @@
 name: Test workflow
 on:
-  pull_request_target:
-    types: opened
+  workflow_run:
+    workflows: Deployment
+    types: completed
 jobs:
   set_and_use_env_vars:
     runs-on: ubuntu-latest
